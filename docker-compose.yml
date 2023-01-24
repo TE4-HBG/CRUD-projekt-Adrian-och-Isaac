@@ -1,0 +1,48 @@
+version: '3'
+services:
+  node:
+    image: node:18-alpine
+    ports:
+      - 3000:3000
+    command: sh -c "yarn install && yarn run dev"
+    working_dir: /app
+    volumes:
+      - ./node-data-b:/app
+    environment:
+      MYSQL_HOST: mariadb
+      MYSQL_USER: root
+      MYSQL_PASSWORD: example
+      MYSQL_DB: todos
+      # MONGO_DB_USERNAME: root
+      # MONGO_DB_PASSWORD: example
+    networks:
+      - internal
+
+  mongodb:
+    image: mongo:5.0.6-focal
+    restart: unless-stopped
+    ports:
+      - 27017:27017
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: root
+    #   MONGO_INITDB_ROOT_PASSWORD: example
+    networks:
+      - internal
+
+  mongo-express:
+    image: mongo-express:1.0.0-alpha.4
+    restart: unless-stopped
+    depends_on:
+      - mongodb
+    ports:
+      - 8082:8081
+    environment:
+      #ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      #ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://mongodb:27017
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge
