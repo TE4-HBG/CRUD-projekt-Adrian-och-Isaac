@@ -8,8 +8,16 @@
 </head>
 <body>
 	<ul>
+		<h1>Todo</h1>
+		  
 
 	</ul>
+
+	<form >
+		<label for="Add"> Add task!</label>
+		<input type="text" id=text_box><br></br>
+	</form>
+
 
 	<script>
 		fetch('/items')
@@ -18,7 +26,7 @@
 				console.log(r)
 				const ul = document.querySelector('ul')
 				for (let i = 0; i < r.length; i++) {
-					ul.appendChild(document.createTextNode(`${r[i]._id} - ${r[i].text}: ${r[i].done}`))				
+					ul.appendChild(document.createTextNode(`${r[i].text}:`))				
 				}
 			})		
 	</script>
