@@ -5,7 +5,7 @@ const app = express()
 app.use(express.json())
 app.use(express.static(__dirname + '/static'))
 
-const url = 'mongodb://mongodb:27017/test'
+const url = 'mongodb://localhost:27017/test'
 mongoose.connect(url)
 mongoose.connection.on('open', function() {
 	console.log('Connected successfully to server')
