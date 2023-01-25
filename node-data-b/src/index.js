@@ -39,6 +39,9 @@ app.delete('/items/id', (req,res)=>{
 
 })
 
-app.post('/items', (req,res) =>{
-	
+app.post('/items',  async (req,res) =>{
+
+	const todosCreate = await TodosModel.create(req.body); 
+	res.status(200).json(todosCreate);
+
 })
