@@ -7,28 +7,46 @@
 	<title>Document</title>
 </head>
 <body>
-	<ul>
-		<h1>Todo</h1>
+	<h1>Todo</h1>
 		  
+	
 
+	<form>
+		<label for="Todo-input">Add Todo:</label>
+		<input type="text" id="todo-input" name="todo-input">
+		<button type="submit" id="submit-button" >Submit</button>
+	  </form>
+	  
+	<!--
+		<script>
+			const submitButton = document.getElementById('submit-button');
+	  const todoInput = document.getElementById('todo-input');
+	  // Connect to the MongoDB database
+	 const MongoClient = require('mongodb').MongoClient;
+	 const uri = "mongodb+srv://localhost:27017/test?retryWrites=true&w=majority";
+	  const client = new MongoClient(uri, { useNewUrlParser: true });
+	  client.connect(err => {
+		  const collection = client.db("test").collection("todos");
+		// Insert a document into the "devices" collection
+		submitButton.addEventListener('click', (event) => {
+			event.preventDefault();
+			collection.insertOne({
+			text: todoInput.value
+		}, function(err, res) {
+			console.log("Inserted document into the collection");
+		});
+		client.close();
+		});
+	});
+	  </script>
+	--> 
+	
+	<ul id="list_values">
+		
 	</ul>
-
-	<form >
-		<label for="Add"> Add task!</label>
-		<input type="text" id=text_box><br></br>
-	</form>
-
-
-	<script>
-		fetch('/items')
-			.then(r => r.json())
-			.then(r => {
-				console.log(r)
-				const ul = document.querySelector('ul')
-				for (let i = 0; i < r.length; i++) {
-					ul.appendChild(document.createTextNode(`${r[i].text}:`))				
-				}
-			})		
-	</script>
+	
+	
+	<script src="js/SendData.js"></script>
+	<script src="js/Displayinfo.js"></script>
 </body>
 </html>

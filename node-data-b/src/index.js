@@ -26,3 +26,19 @@ app.get('/items', async (req, res) => {
 	const todos = await TodosModel.find().exec()
 	res.status(200).json(todos)
 });
+
+app.get('/items/:id', (req,res) =>{
+	req.params.id
+})
+
+app.patch('/items/id',(req,res) =>{
+
+})
+
+app.delete('/items/id', (req,res)=>{
+
+})
+
+app.post('/items', (req,res) =>{
+	
+})
